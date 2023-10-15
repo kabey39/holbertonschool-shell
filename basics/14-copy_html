@@ -1,4 +1,42 @@
 #!/bin/bash
-src-dir=$(pwd)
 
-rsync -av --update --include='*.html' --exclude='*' "$src_dir/" "$dest_dir/"
+# This script copies HTML files from the current directory to the parent directory if they are newer
+
+
+
+# Define the source directory (current directory)
+
+src_dir=$(pwd)
+
+
+
+# Define the destination directory (parent directory)
+
+dest_dir=$(dirname "$src_dir")  # Get the parent directory
+
+
+
+# Use 'find' to locate HTML files in the source directory
+
+find "$src_dir" -type f -name "*.html" -print0 | while IFS= read -r -d '' file; do
+
+
+    rel_path="${file#$src_dir/}"
+
+
+        dest_file="$dest_dir/$rel_path"
+
+
+
+
+	    if [ ! -e "$dest_file" ] || [ "$file" -nt "$dest_file" ]; then
+
+		        # Copy the file to the destination directory
+
+			    cp "$file" "$dest_file"
+
+			      fi
+
+		      done
+
+
