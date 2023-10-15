@@ -1,3 +1,2 @@
 #!/bin/bash
-permissions=$(stat -c %a hello)
-chmod $permissions hello
+if [ -e olleh ]; then chmod --reference=olleh hello; fi
