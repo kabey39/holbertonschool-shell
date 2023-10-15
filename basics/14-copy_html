@@ -1,0 +1,4 @@
+#!/bin/bash
+src-dir=$(pwd)
+
+rsync -av --update --include='*.html' --exclude='*' "$src_dir/" "$dest_dir/"
