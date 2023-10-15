@@ -1,3 +1,3 @@
 #!/bin/bash
-mkdir -p /tmp/u
-find . -maxdepth 1 -type f -name '[A-Z]*' -exec mv {} /tmp/u/ \;
+[ -d /tmp/u ] || mkdir /tmp/u
+for file in [A-Z]*; do [ -f "$file" ] && mv "$file" /tmp/u/; done
